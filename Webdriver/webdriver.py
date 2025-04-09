@@ -1,10 +1,7 @@
 from contextlib import suppress
 from datetime import datetime
 import os
-while 'Laika' not in str(os.getcwd())[-6:]:
-    os.chdir('../..')
 from dotenv import load_dotenv
-load_dotenv('.env')
 from time import sleep
 
 import selenium.common.exceptions as exceptions
@@ -53,7 +50,8 @@ class Driver:
             use_proxy: bool = False,
             offset_index: int = 0,
             offset_amount: int = 20,
-            offset_right: bool = False
+            offset_right: bool = False,
+            dotenv_file_name: str = '.env'
     ):
         if version is not None:
             uc, headless, use_proxy = specify_version(version)
@@ -61,6 +59,7 @@ class Driver:
         print(f'opening {"'uc' " if uc else ""}{"'headless' " if headless else ""}{"'with proxy' " if use_proxy else ""} driver (idx={offset_index})')
 
         if use_proxy and not uc and not headless:
+            load_dotenv(dotenv_file_name)
             self.driver = SelBaseDriver(
                 headless=False,
                 uc=False,
@@ -73,6 +72,7 @@ class Driver:
             self.log_in_to_proxy()
         else:
             if use_proxy:
+                load_dotenv(dotenv_file_name)
                 proxy = (f'{os.getenv('PROXY_USERNAME')}:{os.getenv('PROXY_PASSWORD')}@'
                          f'{os.getenv('PROXY_HOST')}:{os.getenv('PROXY_PORT')}')
             else:
