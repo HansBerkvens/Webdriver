@@ -60,7 +60,8 @@ class Driver:
 
         if use_proxy and not uc and not headless:
             load_dotenv(dotenv_file_name)
-            extension_path = importlib.resources.path("Webdriver", "TunnelBear.crx")
+            extension_path = str(importlib.resources.path("Webdriver", "TunnelBear.crx"))
+            print(f'{extension_path = }')
             self.driver = SelBaseDriver(
                 headless=False,
                 uc=False,
