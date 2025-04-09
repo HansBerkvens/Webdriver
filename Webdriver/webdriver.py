@@ -3,7 +3,7 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 from time import sleep
-
+import importlib.resources
 import selenium.common.exceptions as exceptions
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -60,10 +60,11 @@ class Driver:
 
         if use_proxy and not uc and not headless:
             load_dotenv(dotenv_file_name)
+            extension_path = importlib.resources.path("Webdriver", "TunnelBear.crx")
             self.driver = SelBaseDriver(
                 headless=False,
                 uc=False,
-                extension_zip='TunnelBear.crx',
+                extension_zip=extension_path,
                 block_images=True
             )
             if offset_right:
