@@ -3,7 +3,7 @@ name = "Webdriver"
 version = "0.1.0"
 description = "Custom driver extensions for SeleniumBase Driver"
 authors = [
-  { name = "Hans"}
+  { name = "Hans" }
 ]
 dependencies = [
     "dotenv",
@@ -11,6 +11,10 @@ dependencies = [
     "seleniumbase"
 ]
 requires-python = ">=3.8"
+
+# Tell setuptools about additional package data (e.g., non-Python files)
+[tool.setuptools.package_data]
+"Webdriver" = ["extension.crx"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
