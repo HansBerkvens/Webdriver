@@ -21,7 +21,7 @@ This package provides a custom Selenium-based driver with additional features fo
 To install the package directly from GitHub, run:
 
 ```bash
-pip install git+https://github.com/yourusername/Webdriver.git@main
+pip install git+https://github.com/HansBerkvens/Webdriver.git@main
 ```
 # .env example file
 
