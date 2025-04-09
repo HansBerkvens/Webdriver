@@ -60,14 +60,15 @@ class Driver:
 
         if use_proxy and not uc and not headless:
             load_dotenv(dotenv_file_name)
-            extension_path = str(importlib.resources.path("Webdriver", "TunnelBear.crx"))
-            print(f'{extension_path = }')
-            self.driver = SelBaseDriver(
-                headless=False,
-                uc=False,
-                extension_zip=extension_path,
-                block_images=True
-            )
+            extension_path = importlib.resources.path("Webdriver", "TunnelBear.crx")
+            with extension_path as path:
+                print(f'{str(path) = }')
+                self.driver = SelBaseDriver(
+                    headless=False,
+                    uc=False,
+                    extension_zip=str(path),
+                    block_images=True
+                )
             if offset_right:
                 offset_amount *= -1
             self.reposition(offset_index, offset_amount)
@@ -117,9 +118,9 @@ class Driver:
         self.wait_for((By.XPATH, '//button[@class="plain link"]'), click=True)
 
         # enter credentials
-        self.find_element(By.XPATH, '//input[@name="email"]').send_keys(os.getenv('ROOBET_LOGIN'))
+        self.find_element(By.XPATH, '//input[@name="email"]').send_keys(os.getenv('TUNNELBEAR_LOGIN'))
         sleep(0.1)
-        self.find_element(By.XPATH, '//input[@name="password"]').send_keys(os.getenv('ROOBET_PW'))
+        self.find_element(By.XPATH, '//input[@name="password"]').send_keys(os.getenv('TUNNELBEAR_PW'))
         sleep(0.1)
         self.find_element(By.XPATH, '//button[@type="submit"]').click()
 
