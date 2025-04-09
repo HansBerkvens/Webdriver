@@ -1,4 +1,4 @@
-from .webdriver import Driver
+from Webdriver import Driver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from time import sleep

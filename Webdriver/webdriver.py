@@ -2,7 +2,7 @@ from contextlib import suppress
 from datetime import datetime
 import os
 while 'Laika' not in str(os.getcwd())[-6:]:
-    os.chdir('..')
+    os.chdir('../..')
 from dotenv import load_dotenv
 load_dotenv('.env')
 from time import sleep
