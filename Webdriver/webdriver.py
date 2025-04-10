@@ -62,7 +62,6 @@ class Driver:
             load_dotenv(dotenv_file_name)
             extension_path = importlib.resources.path("Webdriver", "TunnelBear.crx")
             with extension_path as path:
-                print(f'{str(path) = }')
                 self.driver = SelBaseDriver(
                     headless=False,
                     uc=False,
