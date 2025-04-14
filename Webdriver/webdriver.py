@@ -51,8 +51,10 @@ class Driver:
             offset_index: int = 0,
             offset_amount: int = 20,
             offset_right: bool = False,
-            dotenv_file_name: str = '.env'
+            dotenv_file_name: str = '.env',
+            save_bet365_fails: bool = True
     ):
+        self.save_bet365_fails = save_bet365_fails
         if version is not None:
             uc, headless, use_proxy = specify_version(version)
 
@@ -262,10 +264,11 @@ class Driver:
                 print(f'bet365 url would not load, retrying {url}')
                 return self.visit_365_url(url, wait_element, Bet365_NEW_TAB_SLEEP_BACKUP, 'raise')
             if on_error == 'raise':
-                try:
-                    self.driver.save_screenshot(f"bet365fail {datetime.now().strftime("%Y%m%d %H%M%S")}.png")
-                except:
-                    pass  # no big deal if the screenshot fails
+                if self.save_bet365_fails:
+                    try:
+                        self.driver.save_screenshot(f"bet365fail {datetime.now().strftime("%Y%m%d %H%M%S")}.png")
+                    except:
+                        pass  # no big deal if the screenshot fails
                 print('bet365 url would not load again, returning False', url)
                 return False
         return True
