@@ -149,6 +149,7 @@ class Driver:
 
         # click button to activate the VPN
         self.wait_for((By.ID, 'on-off-toggle-container'), click=True)
+        sleep(0.5)
 
     def refresh(self):
         return self.driver.refresh()
