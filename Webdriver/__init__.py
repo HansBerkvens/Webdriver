@@ -5,12 +5,10 @@ from time import sleep
 from threading import Thread
 from queue import Queue
 
-STARTUP_SECONDS_PER_DRIVER: float = 1.0
 
-
-def open_drivers(amt_drivers: int, **kwargs) -> list[Driver] | Driver:
+def open_drivers(amt_drivers: int, new_driver_startup_time: float = 1.0, **kwargs) -> list[Driver] | Driver:
     def create_driver(queue: Queue, index: int):
-        sleep((1+index) * STARTUP_SECONDS_PER_DRIVER)
+        sleep((1+index) * new_driver_startup_time)
         driver = Driver(offset_index=index, **kwargs)
         queue.put(driver)
 
