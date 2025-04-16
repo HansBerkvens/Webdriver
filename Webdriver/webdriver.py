@@ -1,3 +1,4 @@
+import signal
 from contextlib import suppress
 from datetime import datetime
 import os
@@ -10,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from seleniumbase import Driver as SelBaseDriver
-
+import atexit
 
 NEW_TAB_WAIT = 1.5
 TIMEOUT_RETRY = 60
@@ -54,6 +55,10 @@ class Driver:
             dotenv_file_name: str = '.env',
             save_bet365_fails: bool = True
     ):
+        atexit.register(self.printquit)
+        signal.signal(signal.SIGINT, self.signalquit)
+        signal.signal(signal.SIGTERM, self.signalquit)
+
         self.save_bet365_fails = save_bet365_fails
         if version is not None:
             uc, headless, use_proxy = specify_version(version)
@@ -305,6 +310,15 @@ class Driver:
         self.execute_script("arguments[0].scrollIntoView();", element)
         sleep(0.3)
         self.execute_script("arguments[0].scrollIntoView();", element)
+
+    def signalquit(self, signum, frame):
+        print(f'Driver instance was interrupted, closing instance.')
+        self.quit()
+        raise KeyboardInterrupt
+
+    def printquit(self):
+        print('Driver instance was not closed in code, closing using atexit.')
+        self.driver.quit()
 
     def quit(self):
         self.driver.quit()
