@@ -25,12 +25,12 @@ pip install git+https://github.com/HansBerkvens/Webdriver.git@main
 ```
 # .env example file
 
-# Proxy credentials
+### Proxy credentials
 - PROXY_USERNAME=your_proxy_username
 - PROXY_PASSWORD=your_proxy_password
 - PROXY_HOST=proxy_host_address
 - PROXY_PORT=proxy_port_number
 
-# Tunnelbear login
+### Tunnelbear login
 - TUNNELBEAR_LOGIN=your_username
 - TUNNELBEAR_PW=your_password
