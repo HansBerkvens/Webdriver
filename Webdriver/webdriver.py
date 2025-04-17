@@ -17,8 +17,6 @@ TIMEOUT_RETRY = 60
 DRIVER_WAIT_TIMEOUT = 60
 Bet365_NEW_TAB_SLEEP_BACKUP = NEW_TAB_WAIT + 2
 
-VPN_COUNTRY = 'Mexico'
-
 POST_ACTION_SLEEP: float = 0.  # for slower operating systems: add a sleep after finding/clicking an element
 
 
@@ -53,6 +51,7 @@ class Driver:
             offset_right: bool = False,
             dotenv_file_name: str = '.env',
             save_bet365_fails: bool = True
+            vpn_country: str = 'Mexico',  # country to let tunnelbear vpn to
     ):
         atexit.register(self.printquit)
         signal.signal(signal.SIGINT, self.signalquit)
@@ -117,7 +116,7 @@ class Driver:
         sleep(POST_ACTION_SLEEP)
         return result
 
-    def log_in_to_proxy(self, country: str = VPN_COUNTRY):
+    def log_in_to_proxy(self, country: str = 'Mexico'):
         # go to tunnelbear login
         self.visit('https://www.tunnelbear.com/account/signup?v=3.6.2', (By.XPATH, '//button[@class="plain link"]'), new_window=True)
         self.wait_for((By.XPATH, '//button[@class="plain link"]'), click=True)
