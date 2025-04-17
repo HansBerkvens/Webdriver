@@ -41,7 +41,7 @@ class Driver:
 
     def __init__(
             self,
-            version: str | None = None,
+            version: str | None = None,  # string representing a default version; see specify_version function
             *,
             uc: bool = True,  # open in undetected mode
             headless: bool = False,  # open in headless mode
