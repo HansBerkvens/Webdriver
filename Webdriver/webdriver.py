@@ -74,8 +74,6 @@ class Driver:
                 )
             if offset_right:
                 offset_amount *= -1
-            self.reposition(offset_index, offset_amount)
-            self.log_in_to_proxy()
         else:
             if use_proxy:
                 load_dotenv(dotenv_file_name)
@@ -92,7 +90,10 @@ class Driver:
 
             if offset_right:
                 offset_amount *= -1
-            self.reposition(offset_index, offset_amount)
+
+        self.reposition(offset_index, offset_amount, monitor)
+        if use_proxy and not uc and not headless:
+            self.log_in_to_proxy(vpn_country)
 
     def reposition(self, offset_index: int = 0, offset_amount: int = 20):
         try:
