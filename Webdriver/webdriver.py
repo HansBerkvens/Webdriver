@@ -95,7 +95,9 @@ class Driver:
         if use_proxy and not uc and not headless:
             self.log_in_to_proxy(vpn_country)
 
-    def reposition(self, offset_index: int = 0, offset_amount: int = 20):
+    def reposition(self, offset_index: int = 0, offset_amount: int = 20, monitor: int = 0):
+        self.driver.set_window_position(x=monitor*1500, y=0)
+
         try:
             self.driver.maximize_window()
         except:
