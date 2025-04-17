@@ -1,9 +1,8 @@
-import signal
+import atexit
 from contextlib import suppress
 from datetime import datetime
-import os
 from dotenv import load_dotenv
-from time import sleep
+import os
 import importlib.resources
 import selenium.common.exceptions as exceptions
 from selenium.webdriver.remote.webelement import WebElement
@@ -11,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from seleniumbase import Driver as SelBaseDriver
-import atexit
+from time import sleep
 
 NEW_TAB_WAIT = 1.5
 TIMEOUT_RETRY = 60
