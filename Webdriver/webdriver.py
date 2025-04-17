@@ -43,19 +43,18 @@ class Driver:
             self,
             version: str | None = None,
             *,
-            uc: bool = True,
-            headless: bool = False,
-            use_proxy: bool = False,
-            offset_index: int = 0,
-            offset_amount: int = 20,
-            offset_right: bool = False,
-            dotenv_file_name: str = '.env',
-            save_bet365_fails: bool = True
+            uc: bool = True,  # open in undetected mode
+            headless: bool = False,  # open in headless mode
+            use_proxy: bool = False,  # use a proxy; requires credentials
+            offset_index: int = 0,  # offset when opening multiple browsers, index browsers 0, 1, 2, etc.
+            offset_amount: int = 20,  # pixels to offset different drivers by
+            offset_right: bool = False,  # offset new windows to the right or left
+            dotenv_file_name: str = '.env',  # where to find proxy credentials
+            save_bet365_fails: bool = True,  # save an image of the page when bet365 fails to load twice
+            monitor: int = 0,  # monitor to open the window on, -1 for left, 0 for main monitor, 1 for right
             vpn_country: str = 'Mexico',  # country to let tunnelbear vpn to
     ):
         atexit.register(self.printquit)
-        signal.signal(signal.SIGINT, self.signalquit)
-        signal.signal(signal.SIGTERM, self.signalquit)
 
         self.save_bet365_fails = save_bet365_fails
         if version is not None:
