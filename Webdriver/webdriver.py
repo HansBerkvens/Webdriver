@@ -322,6 +322,7 @@ class Driver:
 
     def quit(self):
         self.driver.quit()
+        self.driver = None
 
 
 if __name__ == '__main__':
