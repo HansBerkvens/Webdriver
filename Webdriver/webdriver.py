@@ -312,13 +312,17 @@ class Driver:
         self.execute_script("arguments[0].scrollIntoView();", element)
 
     def signalquit(self, signum, frame):
-        print(f'Driver instance was interrupted, closing instance.')
-        self.quit()
-        raise KeyboardInterrupt
+        if self.driver is not None:
+            print(f'Driver instance was interrupted, closing instance.')
+            self.quit()
+            self.driver = None
+            raise KeyboardInterrupt
 
     def printquit(self):
-        print('Driver instance was not closed in code, closing using atexit.')
-        self.driver.quit()
+        if self.driver is not None:
+            self.driver.quit()
+            self.driver = None
+            print('Driver instance was not closed in code, closing using atexit.')
 
     def quit(self):
         if self.driver is not None:
