@@ -321,8 +321,9 @@ class Driver:
         self.driver.quit()
 
     def quit(self):
-        self.driver.quit()
-        self.driver = None
+        if self.driver is not None:
+            self.driver.quit()
+            self.driver = None
 
 
 if __name__ == '__main__':
