@@ -242,6 +242,9 @@ class Driver:
 
         return False
 
+    def switch_to_window(self, idx: int):
+        self.driver.switch_to.window(self.driver.window_handles[idx])
+
     def visit_new_window(self, url):
         self.driver.execute_script(f"window.open('{url}', '_blank');")
         sleep(NEW_TAB_WAIT)
